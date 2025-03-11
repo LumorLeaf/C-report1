@@ -190,7 +190,28 @@ bool Wall(int pos)
 
 void TurnRight(Direction& heading)
 {
-	//to be finished.
+	switch (heading) 
+	{
+	case DOWN:
+		{
+			heading=LEFT;
+			break;
+		}
+	case LEFT:
+		{
+			heading=UP;
+			break;
+		}
+	case UP:
+		{
+			heading=RIGHT;
+			break;
+		}
+	case RIGHT:
+		{
+			heading=DOWN;
+		}
+	}
 }
 
 //	This function changes position in the maze by determining
@@ -198,7 +219,28 @@ void TurnRight(Direction& heading)
 
 void MoveForward(int& pos, Direction heading)
 {
-	//to be finished.
+	switch (heading) 
+	{
+	case DOWN:
+		{
+			pos+=mazeWidth;
+			break;
+		}
+	case LEFT:
+		{
+			pos--;
+			break;
+		}
+	case UP:
+		{
+			pos-=mazeWidth;
+			break;
+		}
+	case RIGHT:
+		{
+			pos++;
+		}
+	}
 }
 
 //	This function determines the position in the direction
@@ -206,12 +248,55 @@ void MoveForward(int& pos, Direction heading)
 
 void WheresAhead(int pos, Direction heading, int& ahead)
 {
-	//to be finished.
+	ahead=pos;
+	switch (heading) 
+	{
+	case DOWN:
+		{
+			ahead+=mazeWidth;
+			break;
+		}
+	case LEFT:
+		{
+			ahead--;
+			break;
+		}
+	case UP:
+		{
+			ahead-=mazeWidth;
+			break;
+		}
+	case RIGHT:
+		{
+			ahead++;
+		}
+	}
 }
 
 //	This function changes heading by turning left
 
 void TurnLeft(Direction& heading)
 {
-	//to be finished.
+	switch (heading) 
+	{
+	case DOWN:
+		{
+			heading=RIGHT;
+			break;
+		}
+	case LEFT:
+		{
+			heading=DOWN;
+			break;
+		}
+	case UP:
+		{
+			heading=LEFT;
+			break;
+		}
+	case RIGHT:
+		{
+			heading=UP;
+		}
+	}
 }
