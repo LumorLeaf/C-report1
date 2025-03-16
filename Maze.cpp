@@ -121,12 +121,12 @@ void SolveMaze()
 
 //动态储存数组judge来判断是否为试错路径
 	int* judge=new int[i];
-	for(int o=0;o<1;o++)
+	for(int o=0;o<i;o++)
 	{
 		judge[o]=0;
 	}
 
-//
+//循环遍历来判断路径posi[]是否为无效路径，若无效则对应的judge判断值为负数
 	for(int k=0;k<i;k++)
 	{
 		for(int l=0;l<k;l++)
@@ -144,6 +144,7 @@ void SolveMaze()
 	int counter=0;
 	for(int j=0;j<i;j++)
 	{
+		//对于posi[]，只有它对应的judgep[]大于等于0才说明它是答案的路径
 		if(judge[j]>=0)
 		{
 			cout << "Current position: (" << posi[j]/mazeWidth << ',' << posi[j]%mazeWidth << ')' << endl;
