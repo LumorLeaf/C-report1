@@ -30,6 +30,10 @@ char maze[17*17];
 int mazeWidth, mazeHeight;
 int posi[17*17];
 int i=0;
+
+//coordinate is used to storage the position evrytime;
+int coordinate[1000][1000]={'0'};
+
 //	These functions provide access to the maze
 //	as well as provide manipulation of direction
 //	of motion and maze location
@@ -79,6 +83,8 @@ void SolveMaze()
 	
 	FindEntrance(pos);
 	heading = DOWN;
+
+	//position change
 	while (!AtExit(pos))
 	{
 		posi[i]=pos;
@@ -88,6 +94,7 @@ void SolveMaze()
 			cout<<"array too small\n";
 			abort();
 		}
+
 		WheresRight(pos,heading,other);
 		if (!Wall(other))
 		{
@@ -105,18 +112,43 @@ void SolveMaze()
 	}
 	posi[i]=pos;
 	i++;
-	if(i>=400)
+
+	if(i>=289)
 	{
 		cout<<"array too small\n";
 		abort();
 	}
+
+//动态储存数组judge来判断是否为试错路径
+	int* judge=new int[i];
+	for(int o=0;o<1;o++)
+	{
+		judge[o]=0;
+	}
+
+//
+	for(int k=0;k<i;k++)
+	{
+		for(int l=0;l<k;l++)
+		{
+			if(posi[l]==posi[k])
+			{
+				for(int m=l;m<k;m++)
+				{
+					judge[m]-=1;
+				}
+			}
+		}
+	}
+
 	int counter=0;
 	for(int j=0;j<i;j++)
 	{
-		if(posi[j]<0)
-			continue;
-		cout << "Current position: (" << posi[j]/mazeWidth << ',' << posi[j]%mazeWidth << ')' << endl;
-		counter++;
+		if(judge[j]>=0)
+		{
+			cout << "Current position: (" << posi[j]/mazeWidth << ',' << posi[j]%mazeWidth << ')' << endl;
+			counter++;
+		}
 	}
 	cout<<"total steps:"<<counter<<endl;
 	cout << "Maze solved" << endl;
