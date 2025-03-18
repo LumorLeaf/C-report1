@@ -26,9 +26,9 @@ struct Position
 //	All other locations in the maze can be any other character
 //	Global variables defining the maze to be solved
 
-char maze[17*17];
+char* maze=nullptr;
 int mazeWidth, mazeHeight;
-int posi[17*17];
+int* posi=nullptr;
 int i=0;
 
 //coordinate is used to storage the position evrytime;
@@ -60,6 +60,9 @@ bool LoadMaze(const char fname[])
 	if (ifs.good())
 	{
 		ifs >> mazeWidth >> mazeHeight;
+
+		maze=new char[mazeWidth*mazeHeight];
+
 		for (int i=0;i<mazeHeight;i++)
 			for (int j=0;j<mazeWidth;j++)
 				ifs >> maze[i*mazeWidth+j];
@@ -83,6 +86,9 @@ void SolveMaze()
 	
 	FindEntrance(pos);
 	heading = DOWN;
+
+	posi=new int[mazeWidth*mazeHeight];
+	int i =0;
 
 	//position change
 	while (!AtExit(pos))
@@ -153,6 +159,9 @@ void SolveMaze()
 	}
 	cout<<"total steps:"<<counter<<endl;
 	cout << "Maze solved" << endl;
+
+	delete[] posi;
+	delete[] maze;
 }
 
 //	This function scans the maze array for the first non-wall item
